@@ -1,0 +1,38 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.12.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-jersey')
+	compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-web')
+	testCompile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+	compile group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
+    compile group: 'org.apache.camel', name: 'camel-spring-boot-starter', version: '2.21.1'
+
+	runtime('org.springframework.boot:spring-boot-devtools')
+	compileOnly('org.projectlombok:lombok')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
