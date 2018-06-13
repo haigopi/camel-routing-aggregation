@@ -10,20 +10,21 @@ import java.util.UUID;
 
 @Component
 @Slf4j
-public class OwnerContactProcessor  implements Processor{
+public class OwnerContactProcessor implements Processor {
 
     @Override
     public void process(Exchange exchange) throws Exception {
         Tenant tenant = exchange.getIn().getBody(Tenant.class);
-        UUID uuid = UUID.randomUUID();
 
-        exchange.getOut().setHeader("ID", uuid);
+        // Start communicating wth owers -- Up to your cretivity to handle further routes ..
+
+
         log.info("OwnerContactProcessor is now competed its business.");
     }
 
     @PostConstruct
-    public void init(){
-      log.info("{} Created.", this.getClass().getSimpleName());
+    public void init() {
+        log.info("{} Created.", this.getClass().getSimpleName());
     }
 
 }

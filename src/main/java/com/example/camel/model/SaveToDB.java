@@ -19,6 +19,7 @@ public class SaveToDB implements Processor {
         // Don;t forget this one is a spring component.
         tenant.setId(uuid);
         exchange.getOut().setBody(tenant);
+        exchange.getOut().setHeader("ID", uuid); // for the sake to controller that receives back
 
     }
 }

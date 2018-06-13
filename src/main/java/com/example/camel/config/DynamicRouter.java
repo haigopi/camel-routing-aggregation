@@ -37,16 +37,20 @@ public class DynamicRouter {
         List<Owner> owners = tenant.getOwners();
 
         Map<String, Object> headers = exchange.getIn().getHeaders();
-        headers.put("AGGREGATOR", id);
+        headers.put("AGGREGATOR", id); // We are using tenant Id for Aggregation So, we must make sure this id is passed along in all headers
         headers.put("TOTAL_OWNERS_COUNT", owners.size());
 
         for (Owner owner : owners) {
 
             Map<String, Object> headers_new = new HashMap<>();
             headers_new.putAll(headers);
+            headers_new.put("OWNER_ID", owner.getOwnerId());
+
             Exchange newExchange = ExchangeBuilder.anExchange(camelContext).withBody(tenant).build();
+
             newExchange.getIn().setHeaders(headers_new);
-            newExchange.getOut().setHeaders(headers_new);
+            //newExchange.getOut().setHeaders(headers_new);
+
             producerTemplate.asyncSend("direct:TENANT", newExchange);
 
         }

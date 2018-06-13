@@ -1,6 +1,7 @@
 buildscript {
 	ext {
 		springBootVersion = '1.5.12.RELEASE'
+		karateVersion = '0.6.1'
 	}
 	repositories {
 		mavenCentral()
@@ -28,11 +29,16 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-jersey')
 	compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-web')
-	testCompile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
 	compile group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
     compile group: 'org.apache.camel', name: 'camel-spring-boot-starter', version: '2.19.3'
 
 	runtime('org.springframework.boot:spring-boot-devtools')
+
 	compileOnly('org.projectlombok:lombok')
+
+	testCompile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+	testCompile 'junit:junit'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	testCompile 'com.intuit.karate:karate-junit4:' + karateVersion
+	testCompile 'com.intuit.karate:karate-apache:' + karateVersion
 }

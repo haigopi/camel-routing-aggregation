@@ -44,7 +44,7 @@ public class CamelRouters extends RouteBuilder {
 
         from("direct:REST").process(saveToDB).dynamicRouter(method(dynamicRouter));
 
-        from("direct:TENANT").threads(4, 8, "[Gopi Thread]")
+        from("direct:TENANT").threads(4, 8, "[*G*T]")
                 .process(loadOwnerConfigs)
                 .process(urlTransformer)
                 .process(payloadTransformer)

@@ -6,6 +6,7 @@ import org.apache.camel.Processor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.Map;
 import java.util.UUID;
 
 @Component
@@ -16,10 +17,18 @@ public class PayloadTransformer implements Processor
     @Override
     public void process(Exchange exchange) throws Exception {
         Tenant tenant = exchange.getIn().getBody(Tenant.class);
-        UUID uuid = UUID.randomUUID();
+        String owner = (String)exchange.getIn().getHeader("OWNER_ID");
+        // Process & Update Tenant as needed
+        setCorrectHeaders(exchange);
 
-        exchange.getOut().setHeader("ID", uuid);
-        log.info("Payload Transformation is success");
+        log.info("{} Payload Transformation is success", owner);
+    }
+
+    public void setCorrectHeaders(Exchange exchange) {
+        final Object obj = exchange.getIn().getBody();
+        exchange.getOut().setBody(obj);
+        Map<String, Object> headers = exchange.getIn().getHeaders();
+        exchange.getOut().setHeaders(headers);
     }
 
     @PostConstruct

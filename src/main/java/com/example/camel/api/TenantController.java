@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Path("tenant")
@@ -34,7 +36,9 @@ public class TenantController {
         Exchange exchange = ExchangeBuilder.anExchange(camelContext).withBody(tenant).build();
         Exchange response = producerTemplate.send("direct:REST", exchange);
         UUID uniqueRequestId = (UUID) response.getIn().getHeader("ID");
-        return Response.ok("Request Received and Processing:" + uniqueRequestId).build();
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", uniqueRequestId);
+        return Response.ok(map).build();
     }
 
 }
