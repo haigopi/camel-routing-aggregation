@@ -11,3 +11,28 @@ Feature: A simple payload that can kick off the camel routes
     When method post
     Then status 200
     And match response contains { id : '#notnull' }
+
+    And request payload
+    When method post
+    Then status 200
+    And match response contains { id : '#notnull' }
+
+    And request payload
+    When method post
+    Then status 200
+    And match response contains { id : '#notnull' }
+
+    And request payload
+    When method post
+    Then status 200
+    And match response contains { id : '#notnull' }
+
+    And request payload
+    When method post
+    Then status 200
+    And match response contains { id : '#notnull' }
+
+    And request payload
+    When method post
+    Then status 200
+    And match response contains { id : '#notnull' }
