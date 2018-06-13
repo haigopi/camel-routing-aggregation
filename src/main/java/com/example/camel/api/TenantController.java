@@ -17,7 +17,6 @@ import java.util.UUID;
 @Produces(MediaType.APPLICATION_JSON)
 public class TenantController {
 
-
     @Autowired
     CamelContext camelContext;
 
@@ -32,14 +31,9 @@ public class TenantController {
     @POST
     public Response receiveTenantRequest(Tenant tenant) {
 
-        // Builder Pattern
         Exchange exchange = ExchangeBuilder.anExchange(camelContext).withBody(tenant).build();
-
-        // Sync -- look for other methods for async
-        Exchange response = producerTemplate.send("REST", exchange);
-
+        Exchange response = producerTemplate.send("direct:REST", exchange);
         UUID uniqueRequestId = (UUID) response.getIn().getHeader("ID");
-
         return Response.ok("Request Received and Processing:" + uniqueRequestId).build();
     }
 

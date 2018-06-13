@@ -1,3 +1,7 @@
 spring:
   jersey:
     application-path: kiraya
+
+camel:
+  springboot:
+    main-run-controller: true

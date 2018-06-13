@@ -14,8 +14,11 @@ public class SaveToDB implements Processor {
         Tenant tenant = exchange.getIn().getBody(Tenant.class);
         UUID uuid = UUID.randomUUID();
 
-        exchange.getOut().setHeader("ID", uuid);
+        // Persist to DB
         // Obtain a connection and save to your custom DB.
         // Don;t forget this one is a spring component.
+        tenant.setId(uuid);
+        exchange.getOut().setBody(tenant);
+
     }
 }

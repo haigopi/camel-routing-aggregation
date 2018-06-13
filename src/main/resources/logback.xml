@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="logs-folder" value="logs" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %highlight([%15.15thread]) %cyan(%d{yyyy-MM-dd HH:mm:ss}) %boldRed(%-5level) %boldMagenta(%36.36logger) - %boldYellow(%msg%n)
+            </Pattern>
+        </layout>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <file>${logs-folder}/gopi.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover. Make sure the path matches the one in the file element or else
+             the rollover logs are placed in the working directory. -->
+            <fileNamePattern>${logs-folder}/gopi.%d{yyyyMMdd}.%i.log</fileNamePattern>
+
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>[%thread] %-5level [%-30file : %-4line][%date{MMM dd yyyy HH:mm:ss.SSS}] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.apache.commons" level="ERROR" />
+    <logger name="org.apache.http" level="ERROR" />
+    <logger name="org.apache.commons.digester.Digester" level="ERROR" />
+    <logger name="org.apache.commons.digester.Digester.sax" level="ERROR" />
+    <logger name="org.apache.velocity" level="ERROR" />
+    <logger name="org.apache.http" level="ERROR" />
+    <logger name="org.quartz" level="ERROR" />
+    <logger name="org.springframework.jdbc.core.StatementCreatorUtils" level="ERROR" />
+
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="org.springframework.data" level="ERROR"/>
+    <logger name="org.springframework.web" level="ERROR"/>
+    <logger name="org.springframework.boot" level="INFO"/>
+    <logger name="org.springframework.social" level="ERROR"/>
+    <logger name="org.springframework.security" level="ERROR"/>
+
+    <logger name="org.springframework.jdbc.core" level="ERROR" />
+    <logger name="com.jayway.restassured" level="ERROR" />
+    <logger name="org.springframework.jdbc.core.JdbcTemplate" level="ERROR" />
+    <logger name="org.springframework.scheduling.quartz" level="ERROR" />
+    <logger name="org.hibernate" level="ERROR" />
+    <logger name="org.springframework.jndi" level="ERROR" />
+    <logger name="org.thymeleaf" level="ERROR" />
+    <logger name="io.swagger" level="ERROR" />
+
+    <logger name="org.springframework.boot.autoconfigure" level="ERROR" />
+    <logger name="org.springframework.jersey" level="ERROR" />
+    <logger name="org.glassfish.jersey" level="ERROR" />
+    <logger name="javax.ws" level="ERROR" />
+    <logger name="org.apache.catalina" level="ERROR" />
+    <logger name="org.apache.camel" level="INFO" />
+    <logger name="org.mongodb" level="ERROR" />
+
+    <root level="ERROR">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </root>
+
+
+</configuration>

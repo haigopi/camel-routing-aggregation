@@ -29,10 +29,11 @@ public class DynamicRouter {
     }
 
     private String whereToGo(Exchange exchange) {
-        UUID id = (UUID) exchange.getIn().getHeader("ID");
-        log.info("ID created in previous endpoint(SaveDB)", id);
+
+        log.info("Note: Tenant Id created in previous endpoint(SaveDB)");
 
         Tenant tenant = exchange.getIn().getBody(Tenant.class);
+        UUID id = tenant.getId();
         List<Owner> owners = tenant.getOwners();
 
         Map<String, Object> headers = exchange.getIn().getHeaders();
@@ -46,7 +47,7 @@ public class DynamicRouter {
             Exchange newExchange = ExchangeBuilder.anExchange(camelContext).withBody(tenant).build();
             newExchange.getIn().setHeaders(headers_new);
             newExchange.getOut().setHeaders(headers_new);
-            producerTemplate.asyncSend("TENANT", newExchange);
+            producerTemplate.asyncSend("direct:TENANT", newExchange);
 
         }
 

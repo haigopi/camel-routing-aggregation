@@ -30,7 +30,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
 	compile group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
-    compile group: 'org.apache.camel', name: 'camel-spring-boot-starter', version: '2.21.1'
+    compile group: 'org.apache.camel', name: 'camel-spring-boot-starter', version: '2.19.3'
 
 	runtime('org.springframework.boot:spring-boot-devtools')
 	compileOnly('org.projectlombok:lombok')
