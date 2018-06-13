@@ -26,7 +26,7 @@ public class CamelRouters extends RouteBuilder {
     private LoadOwnerConfigs loadOwnerConfigs;
 
     @Autowired
-    private URLTrasformer urlTrasformer;
+    private URLTransformer urlTransformer;
 
     @Autowired
     private PayloadTransformer payloadTransformer;
@@ -45,7 +45,7 @@ public class CamelRouters extends RouteBuilder {
 
         from("TENANT").threads(4, 8, "[Gopi Thread]")
                 .process(loadOwnerConfigs)
-                .process(urlTrasformer)
+                .process(urlTransformer)
                 .process(payloadTransformer)
                 .aggregate("AGGREGATOR", new ConcurrentAggregationStrategy()).completionSize(header("TOTAL_OWNERS_COUNT"))
                 .completionTimeout(1000)

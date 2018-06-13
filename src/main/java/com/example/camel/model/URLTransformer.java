@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Component
 @Slf4j
-public class LoadOwnerConfigs implements Processor {
+public class URLTransformer implements Processor {
 
     @Override
     public void process(Exchange exchange) throws Exception {
@@ -18,11 +18,12 @@ public class LoadOwnerConfigs implements Processor {
         UUID uuid = UUID.randomUUID();
 
         exchange.getOut().setHeader("ID", uuid);
-        log.info("Owner Configurations are now loaded");
+        log.info("URL Transformation is success");
     }
 
+
     @PostConstruct
-    public void init() {
+    public void init(){
         log.info("{} Created.", this.getClass().getSimpleName());
     }
 }
